@@ -1,18 +1,17 @@
 package gov.goias.smartapi;
 
 import gov.goias.cas.auth.CasUserExtractor;
+import org.jasig.cas.client.boot.configuration.CasClientConfigurer;
+import org.jasig.cas.client.boot.configuration.EnableCasClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 
 @SpringBootApplication
-@PropertySources({
-        @PropertySource(value = "classpath:cas-config.properties"),
-})
-public class SmartApiApplication extends SpringBootServletInitializer {
+@EnableCasClient
+public class SmartApiApplication extends SpringBootServletInitializer implements CasClientConfigurer {
 
     @Bean
     public CasUserExtractor casUserExtractor() {
@@ -23,4 +22,9 @@ public class SmartApiApplication extends SpringBootServletInitializer {
         SpringApplication.run(SmartApiApplication.class, args);
     }
 
+    @Override
+    public void configureAuthenticationFilter(FilterRegistrationBean authenticationFilter) {
+        authenticationFilter.getInitParameters().put("artifactParameterName", "casTicket");
+        authenticationFilter.getInitParameters().put("serviceParameterName", "TARGET");
+    }
 }

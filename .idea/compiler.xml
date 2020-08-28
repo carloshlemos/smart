@@ -9,10 +9,13 @@
         <module name="smart-api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="smart" target="1.8" />
+      <module name="smart-api" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="smart" options="-parameters" />
       <module name="smart-api" options="-parameters" />
     </option>
   </component>

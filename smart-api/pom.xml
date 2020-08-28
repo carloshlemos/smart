@@ -57,6 +57,11 @@
 
         <!--Dependências relacionadas ao CAS-->
         <dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-support-springboot</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+        <dependency>
             <groupId>gov.goias</groupId>
             <artifactId>web-core</artifactId>
             <version>1.2.1</version>
@@ -113,29 +118,6 @@
             </activation>
             <properties>
                 <activatedProperties>desenv</activatedProperties>
-                <cas.portal>https://corpdesenv.intra.goias.gov.br/portal-rs/api</cas.portal>
-                <cas.portalToken>35fbe5d7d678d5d1eaf5b722cb65bf2f</cas.portalToken>
-                <cas.portalCrossToken>d7d8ea7ae8e4ecaae9eb12fafae923a1</cas.portalCrossToken>
-
-                <cas.logout.url>${cas.serverName}/pas-acesso-app</cas.logout.url>
-
-                <cas.serverName>https://corpdesenv.intra.goias.gov.br</cas.serverName>
-                <cas.client.serverName>https://localhost:8443</cas.client.serverName>
-                <cas.casServerUrlPrefix>${cas.serverName}/cas</cas.casServerUrlPrefix>
-                <cas.authfilter.casServerLoginUrl>${cas.serverName}/cas/login</cas.authfilter.casServerLoginUrl>
-                <cas.authfilter.casServerLogoutUrl>${cas.serverName}/cas/logout</cas.authfilter.casServerLogoutUrl>
-
-                <include.func.tests>**/Func*.java</include.func.tests>
-                <include.it.tests>**/IT*.java</include.it.tests>
-                <portal.cas.user.test>THIAGO</portal.cas.user.test>
-                <fake.cas.user>fake</fake.cas.user>
-                <cas.ignoressl>true</cas.ignoressl>
-
-                <saml.server.hosts>corpdesenv.intra.goias.gov.br</saml.server.hosts>
-                <saml.server.ignoressl>${cas.ignoressl}</saml.server.ignoressl>
-                <saml.ticket.tolerance>180000</saml.ticket.tolerance>
-
-                <owasp.referer.pattern>.*localhost.*</owasp.referer.pattern>
             </properties>
         </profile>
     </profiles>
