@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>gov.goias</groupId>
+        <artifactId>smart</artifactId>
+        <version>2.0.0</version>
+    </parent>
+
+    <groupId>gov.goias</groupId>
+    <artifactId>smart-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>smart-api</name>
+    <description>Demo project for Spring Boot + CAS</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--Dependências relacionadas ao CAS-->
+        <dependency>
+            <groupId>gov.goias</groupId>
+            <artifactId>web-core</artifactId>
+            <version>1.2.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>velocity</artifactId>
+                    <groupId>org.apache.velocity</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>thymeleaf</artifactId>
+                    <groupId>org.thymeleaf</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.p12</exclude>
+                    <exclude>**/*.jks</exclude>
+                    <exclude>**/*.keystore</exclude>
+                    <exclude>**/*.der</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.p12</include>
+                    <include>**/*.jks</include>
+                    <include>**/*.keystore</include>
+                    <include>**/*.der</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>desenv</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <activatedProperties>desenv</activatedProperties>
+                <cas.portal>https://corpdesenv.intra.goias.gov.br/portal-rs/api</cas.portal>
+                <cas.portalToken>35fbe5d7d678d5d1eaf5b722cb65bf2f</cas.portalToken>
+                <cas.portalCrossToken>d7d8ea7ae8e4ecaae9eb12fafae923a1</cas.portalCrossToken>
+
+                <cas.logout.url>${cas.serverName}/pas-acesso-app</cas.logout.url>
+
+                <cas.serverName>https://corpdesenv.intra.goias.gov.br</cas.serverName>
+                <cas.client.serverName>https://localhost:8443</cas.client.serverName>
+                <cas.casServerUrlPrefix>${cas.serverName}/cas</cas.casServerUrlPrefix>
+                <cas.authfilter.casServerLoginUrl>${cas.serverName}/cas/login</cas.authfilter.casServerLoginUrl>
+                <cas.authfilter.casServerLogoutUrl>${cas.serverName}/cas/logout</cas.authfilter.casServerLogoutUrl>
+
+                <include.func.tests>**/Func*.java</include.func.tests>
+                <include.it.tests>**/IT*.java</include.it.tests>
+                <portal.cas.user.test>THIAGO</portal.cas.user.test>
+                <fake.cas.user>fake</fake.cas.user>
+                <cas.ignoressl>true</cas.ignoressl>
+
+                <saml.server.hosts>corpdesenv.intra.goias.gov.br</saml.server.hosts>
+                <saml.server.ignoressl>${cas.ignoressl}</saml.server.ignoressl>
+                <saml.ticket.tolerance>180000</saml.ticket.tolerance>
+
+                <owasp.referer.pattern>.*localhost.*</owasp.referer.pattern>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
