@@ -55,6 +55,13 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>gov.goias</groupId>
+            <artifactId>smart-ng</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!--Dependências relacionadas ao CAS-->
         <dependency>
             <groupId>gov.goias</groupId>

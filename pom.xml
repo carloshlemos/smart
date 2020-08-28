@@ -18,6 +18,7 @@
 
     <modules>
         <module>smart-api</module>
+        <module>smart-ng</module>
     </modules>
 
 </project>
