@@ -19,11 +19,8 @@ public class ToolbarRep {
     public ToolbarRep(UsuarioRep usuario, AlmPublisher.AlmRep alm) throws IOException {
         this.usuario = usuario;
         this.alm = alm;
-        this.gitRepositoryState = GitRepositoryState.getInstance();
     }
 
     private UsuarioRep usuario;
     private AlmPublisher.AlmRep alm;
-    private GitRepositoryState gitRepositoryState;
-
 }
